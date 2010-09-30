@@ -1,2 +1,4 @@
 sinatra
 sequel
+mysql
+mysqlplus
