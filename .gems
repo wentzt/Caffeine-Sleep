@@ -2,3 +2,4 @@ sinatra
 sequel
 mysql
 mysqlplus
+haml
