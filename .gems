@@ -1,5 +1,4 @@
 sinatra
-sequel
-mysql
-mysqlplus
+dm-core
+dm-mysql-adapter
 haml

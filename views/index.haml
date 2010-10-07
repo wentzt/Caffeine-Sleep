@@ -1,2 +1,7 @@
 #content
-    %h2 Hello World, #{@ds2[:fname]}
+    %h2 Hello World, #{@user.fname}
+    %form{:name => "test", 
+        :action => "/update", 
+        :method => "post"}
+        %input{:type => "text", :name => "fname", :value => "#{@user.fname}"}
+        %input{:type => "submit", :value => "Update"}
