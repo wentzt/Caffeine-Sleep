@@ -4,10 +4,11 @@ require 'sinatra'
 require 'sequel'
 
 get '/' do
-  DB = Sequel.connect(ENV['DATABASE_URL'] || 'mysql://caffeineadmin:sleep@caffeine-sleep.c13gxsgstw8a.us-east-1.rds.amazonaws.com/caffeine')
   
-  ds = DB[:Test]
-  @ds2 = ds.first(:id => 2)
+  DB = Sequel.connect('mysql://caffeine_sleep:sleep@www.wentzt.net/caffeine_sleep')
+  
+  ds = DB[:users]
+  @ds2 = ds.first(:user_id => 1)
   
   haml :index
 end
