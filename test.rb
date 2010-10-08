@@ -26,6 +26,9 @@ end
 
 post '/register' do
   @user = User.create(:username => params[:username], :password => params[:password], :fname => params[:fname], :lname => params[:lname])
+  if @user
+    session[:user_id] = @user.user_id
+  end
   redirect '/'
 end
 
