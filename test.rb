@@ -30,8 +30,7 @@ end
 
 post '/login' do
   $user = User.first(:username => params[:username], :password => params[:password])
-
-  $user.fname
+  
   redirect('/')
 end
 
