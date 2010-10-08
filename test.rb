@@ -6,13 +6,14 @@ require 'haml'
 
 DataMapper.setup(:default, ENV['DB_URL'])
 
-$user = nil
+enable :sessions
 
 get '/' do
   
   @greeting = "Not logged in."
-  if $user then
-    @greeting = "Welcome, " + $user.fname + " " + $user.lname
+  if session[:user_id] then
+    user = User.get(session[:user_id])
+    @greeting = "Welcome, " + user.fname + " " + user.lname
   end
     
   
@@ -29,7 +30,16 @@ post '/register' do
 end
 
 post '/login' do
-  $user = User.first(:username => params[:username], :password => params[:password])
+  @user = User.first(:username => params[:username], :password => params[:password])
+  if @user then
+    session[:user_id] = @user.user_id
+  end
+  
+  redirect('/')
+end
+
+get '/logout' do
+  session[:user_id] = nil
   
   redirect('/')
 end
