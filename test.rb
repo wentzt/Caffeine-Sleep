@@ -25,7 +25,7 @@ get '/register' do
 end
 
 post '/register' do
-  
+  @user = User.create(:username => params[:username], :password => params[:password])
   redirect ('/')
 end
 
