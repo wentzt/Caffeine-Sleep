@@ -1,14 +1,14 @@
 class UserGroup
   include DataMapper::Resource
 
-  property :id, Serial
-  property :userId, Integer
+  property :userid, Integer
+  property :groupId, Integer
 end
 
 class Group
   include DataMapper::Resource
 
-  property :id, Serial
+  property :group_id, Serial
   property :name, String
   property :type, String
 end
@@ -16,38 +16,38 @@ end
 class Product
   include DataMapper::Resource
 
-  property :id, Serial
+  property :product_id, Serial
   property :name, String
-  property :mg, Integer
   property :type, String
-end
-
-class Productivity
-  include DataMapper::Resource
-
-  property :id, Serial
-  property :userId, Integer
-  property :level, String
-  property :timeStamp, DateTime
-end
-
-class CaffeineLog
-  include DataMapper::Resource
-
-  property :id, Serial
-  property :userId, Integer
-  property :productId, Integer
   property :mg, Integer
-  property :time, DateTime
+end
+
+class Productivity_Log
+  include DataMapper::Resource
+
+  property :productivity_id, Serial
+  property :user_id, Integer
+  property :level, String
+  property :timestamp, DateTime
+end
+
+class Caffeine_Log
+  include DataMapper::Resource
+
+  property :caffeine_id, Serial
+  property :user_id, Integer
+  property :product_id, Integer
+  property :mg_intake, Integer
+  property :time, Integer
   property :timeStamp, DateTime
 end
 
-class SleepLog
+class Sleep_Log
   include DataMapper::Resource
 
-  property :id, Serial
-  property :userId, Integer
-  property :startTime, DateTime
+  property :sleep_id, Serial
+  property :user_id, Integer
+  property :start_time, DateTime
   property :length, Integer
   property :timeStamp, DateTime
 end
@@ -55,12 +55,12 @@ end
 class User
   include DataMapper::Resource
 
-  property :id, Serial
-  property :type, String
-  property :groupId, Integer
+  property :user_id, Serial
   property :fname, String
   property :lname, String
   property :email, String
+  property :username, String
   property :password, String
-  property :timeStamp, DateTime
+  property :type, String
+  property :time_stamp, DateTime
 end
