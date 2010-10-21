@@ -1,0 +1,51 @@
+ul.topnav
+  list-style: none
+  padding: 0 20px
+  margin: 0
+  float: left
+  width: 920px
+  font-size: 1.2em
+  background: url('topnav_bg.gif') repeat-x
+  li
+    float: left
+    margin: 0
+    padding: 0 15px 0 0
+    position: relative
+    a
+      padding: 10px 5px
+      color: #fff
+      display: block
+      text-decoration: none
+      float: left
+      &:hover
+        background: url(topnav_hover.gif) no-repeat center top
+    span.subhover
+      background-position: center bottom
+      cursor: pointer
+    ul.subnav
+      list-style: none
+      position: absolute
+      left: 0
+      top: 35px
+      background: #333
+      margin: 0
+      padding: 0
+      display: none
+      float: left
+      width: 170px
+      border: 1px solid #111
+      li
+        margin: 0
+        padding: 0
+        border-top: 1px solid #252525
+        border-bottom: 1px solid #444
+        clear: both
+        width: 170px
+
+html ul.topnav li ul.subnav li a
+  float: left
+  width: 145px
+  background: #333333 url(dropdown_linkingbg.gif) no-repeat 10px center
+  padding-left: 20px
+  &:hover
+    background: #222222 url(dropdown_linkingbg.gif) no-repeat 10px center
