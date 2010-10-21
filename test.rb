@@ -29,7 +29,7 @@ end
 post '/register' do
   @user = User.create(:username => params[:username], :password => params[:password], :fname => params[:fname], :lname => params[:lname])
   if @user
-    session[:user_id] = @user.user_id
+    session[:user_id] = @user.id
   end
   redirect '/'
 end
@@ -37,7 +37,7 @@ end
 post '/login' do
   @user = User.first(:username => params[:username], :password => params[:password])
   if @user then
-    session[:user_id] = @user.user_id
+    session[:user_id] = @user.id
   end
   
   redirect '/'
