@@ -1,11 +1,13 @@
 %html
     %head
+        %link{:rel => "stylesheet", :type => "text/css", :href => "nav.css"}
         %title "Caffeine-Sleep"
     %body
         #main-content
             #header
                 #logo
-                #header-nav
+                .header-nav
+                    = renderPartial "views/nav.haml"
                 #login
                     %span #{@greeting}
                     %form{:name => "test", 

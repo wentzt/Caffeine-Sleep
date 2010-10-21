@@ -6,6 +6,8 @@ require 'haml'
 
 DataMapper.setup(:default, ENV['DB_URL'])
 
+require 'models'
+
 enable :sessions
 
 get '/' do
@@ -38,21 +40,23 @@ post '/login' do
     session[:user_id] = @user.user_id
   end
   
-  redirect('/')
+  redirect '/'
 end
 
 get '/logout' do
   session[:user_id] = nil
   
-  redirect('/')
+  redirect '/'
 end
 
-class User
-  include DataMapper::Resource
+get '/nav.css' do
+  content_type 'text/css', :charset => 'utf-8'
+  sass :nav
+end
 
-  property :user_id,        Serial
-  property :username,       String
-  property :password,       String
-  property :fname,          String
-  property :lname,          String
+helpers do
+  def renderPartial(pathAndView)
+    haml :"#{pathAndView}"
+    #Haml::Engine.new(IO.read(pathAndView)).render
+  end
 end
