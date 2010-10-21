@@ -55,8 +55,8 @@ get '/nav.css' do
 end
 
 helpers do
-  def renderPartial(pathAndView)
-    haml :"#{pathAndView}"
+  def renderPartial(view)
+    haml :"#{view}"
     #Haml::Engine.new(IO.read(pathAndView)).render
   end
 end
