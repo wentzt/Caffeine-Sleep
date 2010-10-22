@@ -26,8 +26,27 @@ get '/register' do
   haml :register
 end
 
+get '/accountsettings' do
+  if session[:user_id] then
+   userId = session[:user_id]
+   @user = User.get(session[:user_id])
+  end
+  haml :accountsettings
+end 
+
+post '/accountsettings' do
+  if session[:user_id] then
+    user = User.get(session[:user_id])
+    user.fname = params[:fname]
+    user.lname = params[:lname]
+    user.password = params[:password]
+    user.save()
+   end
+redirect '/'
+end
+
 post '/register' do
-  @user = User.create(:username => params[:username], :password => params[:password], :fname => params[:fname], :lname => params[:lname])
+  @user = User.create(:username => params[:username], :password => params[:password], :fname => params[:fname], :lname => params[:lname], :email => params[:email])
   if @user
     session[:user_id] = @user.id
   end
