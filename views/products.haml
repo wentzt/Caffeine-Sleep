@@ -1,0 +1,10 @@
+%html
+  %head
+    %title Products
+  %body
+    - @products.each do |product|
+      %p Name: #{product.name}
+      %p Type: #{product.type}
+      %p Amount: #{product.mg}
+      %br
+      %br

@@ -1,0 +1,12 @@
+%html
+  %head
+    %title Groups
+  %body
+    -if @groups.empty?
+      %h1 You do not have any groups
+      %a{:href => "/addGroup"} Add a Group
+    -@groups.each do |group|
+      %p Name: #{group.name}
+      %p Type: #{group.type}
+      %br
+      %br

@@ -1,0 +1,15 @@
+%html
+  %head
+    %title New Product
+  %body
+    %form{:name => "newProduct", :action => "/addProduct", :method => "post"}
+      %label{:rel => "name"} Name
+      %input{:type => "text", :name => "name"} 
+      %br
+      %label{:rel => "type"} Type
+      %input{:type => "text", :name => "type"}
+      %br
+      %label{:rel => "mg"} Amount
+      %input{:type => "text", :name => "mg"}
+      %br
+      %input{:type => "submit", :value => "Add Product"}

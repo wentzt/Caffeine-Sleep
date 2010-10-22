@@ -1,0 +1,12 @@
+%html
+  %head
+    %title New Group
+  %body
+    %form{:action => "/addGroup", :method => "post"}
+      %label{:rel => "name"} Name 
+      %input{:type => "text", :name => "name"}
+      %br
+      %label{:rel => "type"} Type 
+      %input{:type => "text", :name => "type"} 
+      %br
+      %input{:type => "submit", :value => "Add Group"}
