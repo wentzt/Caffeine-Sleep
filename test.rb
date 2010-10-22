@@ -26,6 +26,33 @@ get '/register' do
   haml :register
 end
 
+get '/products' do
+  @products = Product.all
+  haml :products
+end
+
+get '/addProduct' do
+  haml :addProduct
+end
+
+post '/addProduct' do
+  @product = Product.create(:name => params[:name], :type => params[:type], :mg => params[:mg])
+end
+
+get '/groups' do
+  @groups = Group.all
+  haml :groups
+end
+
+get '/addGroup' do
+  haml :addGroup
+end
+
+post '/addGroup' do
+  @group = Group.create(:name => params[:name], :type => params[:type])
+end
+
+
 get '/accountsettings' do
   if session[:user_id] then
    userId = session[:user_id]
