@@ -31,12 +31,35 @@ get '/products' do
   haml :products
 end
 
+get '/product&productId=:productId' do |id|
+  @product=Product.get(id)
+  haml :product
+end
+
 get '/addProduct' do
   haml :addProduct
 end
 
 post '/addProduct' do
   @product = Product.create(:name => params[:name], :type => params[:type], :mg => params[:mg])
+  redirect "/product&productId=#{@product.id}"
+end
+
+get '/deleteProduct&productId=:productId' do |id|
+  product = Product.get(id)
+  product.destroy
+  redirect '/products'
+end
+
+get '/group&groupId=:groupId' do |id|
+  @group = Group.get(id)
+  haml :group 
+end
+
+get '/deleteGroup&groupId=:groupId' do |id|
+  group=Group.get(id)
+  group.destroy
+  redirect '/groups'
 end
 
 get '/groups' do
@@ -50,6 +73,7 @@ end
 
 post '/addGroup' do
   @group = Group.create(:name => params[:name], :type => params[:type])
+  redirect "group&groupId=#{@group.id}"
 end
 
 

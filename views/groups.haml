@@ -6,7 +6,11 @@
       %h1 You do not have any groups
       %a{:href => "/addGroup"} Add a Group
     -@groups.each do |group|
-      %p Name: #{group.name}
-      %p Type: #{group.type}
+      %label Name: #{group.name}
+      %br
+      %label Type: #{group.type}
+      %br
+      %a{:href => "/group&groupId=#{group.id}"} View
+      %a{:href => "/deleteGroup&groupId=#{group.id}"} Delete
       %br
       %br

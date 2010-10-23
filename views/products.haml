@@ -2,9 +2,17 @@
   %head
     %title Products
   %body
+    - if @products.empty?
+      %h1 You do not have any products
+      %a{:href => "/addProduct"} Add a Product
     - @products.each do |product|
-      %p Name: #{product.name}
-      %p Type: #{product.type}
-      %p Amount: #{product.mg}
+      %label Name: #{product.name}
+      %br
+      %label Type: #{product.type}
+      %br
+      %label Amount: #{product.mg}
+      %br
+      %a{:href => "/product&productId=#{product.id}"} View 
+      %a{:href => "/deleteProduct&productId=#{product.id}"} Delete 
       %br
       %br
