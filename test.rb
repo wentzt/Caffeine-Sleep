@@ -4,6 +4,7 @@ require 'sinatra'
 require 'dm-core'
 require 'haml'
 
+
 DataMapper.setup(:default, ENV['DB_URL'])
 
 require 'models'
@@ -24,6 +25,58 @@ end
 
 get '/register' do
   haml :register
+end
+
+get '/logsleep' do
+  if session[:user_id] then
+    @error="None"
+    haml :logsleep
+  end
+end
+
+post '/logsleep' do
+  if session[:user_id] then
+    user = User.get(session[:user_id])
+    @sleepEntry = Sleep_Log.create(:start_time => Time.parse(params[:starttime]), :length => Integer(params[:length]), :user => user)
+    @error = @sleepEntry.errors     
+    haml :logsleep
+   end
+end
+    
+get '/viewsleep' do
+  if session[:user_id] then
+     user = User.get(session[:user_id])
+     @sleepEntries = Sleep_Log.all(:user => user) 
+     if @sleepEntries.respond_to?("each")
+        haml :viewsleep    
+     else
+        redirect 'asdasdf'
+     end
+  end
+end
+
+get '/logproductivity' do
+  if session[:user_id] then
+    haml :logproductivity
+  end
+end
+
+get '/viewproductivity' do
+  if session[:user_id] then
+   user = User.get(session[:user_id])
+   @productivityEntries = Productivity_Log.all(:user => user) 
+   haml :viewproductivity
+  end
+end
+
+post '/logproductivity' do
+  if session[:userId] then
+    user = User.get(session[:user_id])
+    log = Productivity_Log.create(:level => Integer(params[:level]), :user => user)
+    if log.nil?
+      raise 'hell' 
+    end
+  end
 end
 
 get '/accountsettings' do

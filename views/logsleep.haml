@@ -1,0 +1,25 @@
+%html
+    %head
+        %title Caffeine-Sleep log sleep
+    %body
+        #main-content
+            #header
+                #logo
+                #header-nav
+                #login
+                    %form{:name => "test", 
+                        :action => "/logsleep", 
+                        :method => "post"}
+                        %label{:rel => "starttime"} starttime
+                        %input{:type => "text", :name => "starttime"}
+                        %label{:rel => "length"} length
+                        %input{:type => "text", :name => "length"}
+
+                        %input{:type => "submit", :value => "Log Sleep"}
+                        
+            #content
+                %span{@error}
+                %h1 Caffeine and intake logger
+                %p We wanted to be able to track caffeine intake vs sleep in comparison to productivity.  This is how we will do that.
+            #footer
+                Copyright - Brousalis Enterprises, LLC

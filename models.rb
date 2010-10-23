@@ -1,3 +1,4 @@
+require 'dm-validations'
 class UserGroup
   include DataMapper::Resource
 
