@@ -1,0 +1,19 @@
+%html
+    %head
+        %title Caffeine-Sleep Register
+    %body
+        #main-content
+            #header
+                #logo
+                #header-nav
+                #login
+                    - @sleepEntries.each do |entry|
+                        %label = "start time"
+                        %span = entry.start_time
+                        %label = "length"
+                        %span = entry.length
+            #content
+                %h1 Caffeine and intake logger
+                %p We wanted to be able to track caffeine intake vs sleep in comparison to productivity.  This is how we will do that.
+            #footer
+                Copyright - Brousalis Enterprises, LLC
