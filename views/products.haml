@@ -2,6 +2,8 @@
   %head
     %title Products
   %body
+    .header-nav
+      = renderPartial "nav"
     - if @products.empty?
       %h1 You do not have any products
       %a{:href => "/addProduct"} Add a Product

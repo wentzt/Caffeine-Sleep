@@ -3,24 +3,13 @@
         %link{:rel => "stylesheet", :type => "text/css", :href => "nav.css"}
         %title "Caffeine-Sleep"
     %body
-        #main-content
-            #header
-                #logo
-                .header-nav
-                    = renderPartial "/nav"
-                #login
-                    %span #{@greeting}
-                    %form{:name => "test", 
-                        :action => "/login", 
-                        :method => "post"}
-                        %label{:rel => "username"} Username
-                        %input{:type => "text", :name => "username"}
-                        %label{:rel => "password"} Password
-                        %input{:type => "password", :name => "password"}
-                        %input{:type => "submit", :value => "Login"}
-            #content
-                %h1 Caffeine and intake logger
-                %p We wanted to be able to track caffeine intake vs sleep in comparison to productivity.  This is how we will do that.
-            #footer
-                Copyright - Brousalis Enterprises, LLC
+        .header-nav
+            = renderPartial "nav"
+        #login
+            %span #{@greeting}
+        #content
+            %h1 Caffeine and intake logger
+            %p We wanted to be able to track caffeine intake vs sleep in comparison to productivity.  This is how we will do that.
+        #footer
+            Copyright - Brousalis Enterprises, LLC
             

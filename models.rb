@@ -30,7 +30,7 @@ class Productivity_Log
 
   property :id,         Serial
   property :level,      Integer,  :required => true
-  property :timestamp,  DateTime, :writer => :private
+  property :timestamp,  DateTime
   
   belongs_to :user
 end

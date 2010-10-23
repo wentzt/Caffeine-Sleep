@@ -1,28 +1,18 @@
 %html
-    %head
-        %title Caffeine-Sleep Account Settings
+  %head
+    %title Caffeine-Sleep Account Settings
     %body
-        #main-content
-            #header
-                #logo
-                #header-nav
-                #login
-                    %span #{@greeting}
-                    %form{:name => "test", 
-                        :action => "/accountsettings", 
-                        :method => "post"}
-                        %label{:rel => "username"} Username
-                        %input{:type => "text", :name => "username", :value => "#{@user.username}"}
-                        %label{:rel => "password"} Password
-                        %input{:type => "password", :name => "password", :value => "#{@user.password}"}
-                        %label{:rel => "fname"} Firstname
-                        %input{:type => "fname", :name => "fname", :value => "#{@user.fname}"}
-                        %label{:rel => "lname"} Lastname
-                        %input{:type => "lname", :name => "lname", :value => "#{@user.lname}"}
-                        %input{:type => "submit", :value => "Update"}
-                        
-            #content
-                %h1 Caffeine and intake logger
-                %p We wanted to be able to track caffeine intake vs sleep in comparison to productivity.  This is how we will do that.
-            #footer
-                Copyright - Brousalis Enterprises, LLC
+      .header-nav
+        = renderPartial "nav"
+      %form{:name => "updateAccount", :action => "/accountsettings", :method => "post"}
+        %label{:rel => "username"} Username
+        %input{:type => "text", :name => "username", :value => "#{@user.username}"}
+        %label{:rel => "password"} Password
+        %input{:type => "password", :name => "password", :value => "#{@user.password}"}
+        %label{:rel => "fname"} Firstname
+        %input{:type => "fname", :name => "fname", :value => "#{@user.fname}"}
+        %label{:rel => "lname"} Lastname
+        %input{:type => "lname", :name => "lname", :value => "#{@user.lname}"}
+        %label{:rel => "email"} email
+        %input{:type => "text", :name => "email", :value => "#{@user.email}"}
+        %input{:type => "submit", :value => "Update"}

@@ -2,6 +2,8 @@
   %head
     %title Groups
   %body
+    .header-nav
+      = renderPartial "nav"
     -if @groups.empty?
       %h1 You do not have any groups
       %a{:href => "/addGroup"} Add a Group

@@ -89,21 +89,16 @@ post '/logsleep' do
   if session[:user_id] then
     user = User.get(session[:user_id])
     @sleepEntry = Sleep_Log.create(:start_time => Time.parse(params[:starttime]), :length => Integer(params[:length]), :user => user)
-    @error = @sleepEntry.errors     
-    haml :logsleep
-   end
+  end
+  redirect 'viewsleep'
 end
     
 get '/viewsleep' do
   if session[:user_id] then
      user = User.get(session[:user_id])
      @sleepEntries = Sleep_Log.all(:user => user) 
-     if @sleepEntries.respond_to?("each")
-        haml :viewsleep    
-     else
-        redirect 'asdasdf'
-     end
   end
+  haml :viewsleep
 end
 
 get '/logproductivity' do
@@ -123,17 +118,14 @@ end
 post '/logproductivity' do
   if session[:userId] then
     user = User.get(session[:user_id])
-    log = Productivity_Log.create(:level => Integer(params[:level]), :user => user)
-    if log.nil?
-      raise 'hell' 
-    end
+    @log = Productivity_Log.create(:level => Integer(params[:level]), :user => user, :timestamp => Time.new)
   end
+  redirect '/viewproductivity'
 end
 
 get '/accountsettings' do
   if session[:user_id] then
-   userId = session[:user_id]
-   @user = User.get(session[:user_id])
+    @user = User.get(session[:user_id])
   end
   haml :accountsettings
 end 
@@ -141,12 +133,9 @@ end
 post '/accountsettings' do
   if session[:user_id] then
     user = User.get(session[:user_id])
-    user.fname = params[:fname]
-    user.lname = params[:lname]
-    user.password = params[:password]
-    user.save()
-   end
-redirect '/'
+    user.update(:fname => params[:fname], :lname => params[:lname], :username => params[:username], :password => params[:password], :email => params[:email])
+  end
+  redirect '/'
 end
 
 post '/register' do
@@ -164,6 +153,10 @@ post '/login' do
   end
   
   redirect '/'
+end
+
+get '/login' do
+  haml :login
 end
 
 get '/logout' do

@@ -1,22 +1,10 @@
 %html
     %head
-        %title Caffeine-Sleep log sleep
+        %title Loging Productivity
     %body
-        #main-content
-            #header
-                #logo
-                #header-nav
-                #login
-                    %form{:name => "productivity", 
-                        :action => "/logproductivity", 
-                        :method => "post"}
-                        %label{:rel => "level"} level
-                        %input{:type => "text", :name => "level"}
-
-                        %input{:type => "submit", :value => "Log Productivity"}
-                        
-            #content
-                %h1 Caffeine and intake logger
-                %p We wanted to be able to track caffeine intake vs sleep in comparison to productivity.  This is how we will do that.
-            #footer
-                Copyright - Brousalis Enterprises, LLC
+        .header-nav
+            = renderPartial "nav"
+        %form{:name => "productivity", :action => "/logproductivity", :method => "post"}
+            %label{:rel => "level"} level
+            %input{:type => "text", :name => "level"}
+            %input{:type => "submit", :value => "Log Productivity"}

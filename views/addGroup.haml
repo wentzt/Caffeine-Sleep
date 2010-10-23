@@ -2,6 +2,8 @@
   %head
     %title New Group
   %body
+    .header-nav
+      = renderPartial "nav"
     %form{:action => "/addGroup", :method => "post"}
       %label{:rel => "name"} Name 
       %input{:type => "text", :name => "name"}
