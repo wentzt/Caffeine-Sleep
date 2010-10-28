@@ -1,0 +1,15 @@
+%html
+  %head
+    %title Caffeine Logs
+  %body
+    - if @caffeineEntries.empty?
+      %h1 You have not Loged and Caffeine Consumption
+    #caffeine
+      - @caffeineEntries.each do |caffiene|
+        %label Time: #{caffiene.time}
+        %br
+        %label Amount: #{caffiene.mg}
+        %br
+        %label Product: #{caffiene.product.name}
+        %br
+        %br

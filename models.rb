@@ -1,4 +1,5 @@
 require 'dm-validations'
+DataMapper::Model.raise_on_save_failure = true
 class UserGroup
   include DataMapper::Resource
 
@@ -30,7 +31,7 @@ class Productivity_Log
 
   property :id,         Serial
   property :level,      Integer,  :required => true
-  property :timestamp,  DateTime
+  property :timestamp,  DateTime, :writer => :private
   
   belongs_to :user
 end
@@ -71,7 +72,7 @@ class User
   property :timestamp,  DateTime, :writer => :private
   
   has n, :caffeine_logs
-  has n, :productivity_logs
+  has n, :productivity_logs, :child_key => [:user_id]
   has n, :sleep_logs
   has n, :groups, :through => :usergroups
 end

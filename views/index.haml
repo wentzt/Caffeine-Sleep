@@ -1,15 +1,11 @@
 %html
     %head
-        %link{:rel => "stylesheet", :type => "text/css", :href => "nav.css"}
+        %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
+        %script{:type => "text/javascript", :src => "style.js"}
+        %script{:type => "text/javascript", :src => "http://code.jquery.com/jquery-latest.js"}
         %title "Caffeine-Sleep"
     %body
         .header-nav
+            %div #{@greeting}
+            %h1 Caffeine Intake Logger
             = renderPartial "nav"
-        #login
-            %span #{@greeting}
-        #content
-            %h1 Caffeine and intake logger
-            %p We wanted to be able to track caffeine intake vs sleep in comparison to productivity.  This is how we will do that.
-        #footer
-            Copyright - Brousalis Enterprises, LLC
-            

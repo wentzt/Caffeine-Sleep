@@ -1,17 +1,13 @@
 %html
-    %head
-        %title Sleep
-    %body
-        .header-nav
-            = renderPartial "nav"
-        - if @sleepEntries.empty?
-            %h1 You have not loged any sleep
-            %a{:href => "/logsleep"} Log Sleep
-        #sleep
-            - @sleepEntries.each do |entry|
-                %label start time
-                %span = entry.start_time
-                %label length
-                %span = entry.length
-        #footer
-            Copyright - Brousalis Enterprises, LLC
+  %head
+    %title Sleep
+  %body
+    .header-nav
+      = renderPartial "nav"
+    - if @sleepEntries.empty?
+      %h1 No Sleep Entries Found
+    #sleep
+      - @sleepEntries.each do |sleep|
+        %p Length: 
+        %span
+          = sleep.length

@@ -1,0 +1,14 @@
+%html
+  %head
+    %title #{@product.name}
+  %body
+    .header-nav
+      = renderPartial "nav"
+    %h1 Product Infomation
+    %label Name: #{@product.name}
+    %br
+    %label Type: #{@product.type}
+    %br
+    %label Amount: #{@product.mg}
+    %br
+    %a{:href => "/deleteProduct#{@product.id}"} Delete

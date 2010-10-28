@@ -10,9 +10,5 @@
         #productivity
             - @productivityEntries.each do |entry|                  
                 %p Productivity level                         
-                %span #{entry.level}
-        #content
-            %h1 Caffeine and intake logger
-            %p We wanted to be able to track caffeine intake vs sleep in comparison to productivity.  This is how we will do that.
-        #footer
-            Copyright - Brousalis Enterprises, LLC
+                %span
+                    = entry.level

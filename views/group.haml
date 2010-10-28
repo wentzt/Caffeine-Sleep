@@ -1,0 +1,12 @@
+%html
+  %head
+    %title #{@group.name}
+  %body
+    .header-nav
+      = renderPartial "nav"
+    %h1 Group Infomation
+    %label Name: #{@group.name}
+    %br
+    %label Type: #{@group.type}
+    %br
+    %a{:href => "/deleteGroup#{@group.id}"} Delete

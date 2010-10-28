@@ -1,0 +1,17 @@
+%html
+  %head
+    %title Caffeine Log Entry
+  %body
+    %form{:name => "caffLog", :action => "/logCaffeine", :method => "post"}
+      %label{:for => "time"} Time: 
+      %input{:type => "text", :name => "time", :id => "time"}
+      %br
+      %label{:for => "mg"} Amount
+      %input{:type => "text", :name => "mg", :id => "mg"}
+      %br
+      %label{:for => "product"} Product:
+      %select{:id => "product", :id => "product", :name => "product"}
+        - @products.each do |product|
+          %option{:value => "#{product.id}"}
+            = product.name
+      %input{:type => "submit", :value => "Log Caffiene Consumption"}
