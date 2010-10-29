@@ -143,7 +143,7 @@ end
 
 get '/caffeineLogs' do
   if session[:user_id]
-    @caffieneEntries = Caffeine_Log.all
+    @caffeineEntries = Caffeine_Log.all
     haml :caffeineLogs
   else
     halt "Access Dennied"
