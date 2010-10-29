@@ -95,8 +95,9 @@ end
     
 get '/viewsleep' do
   if session[:user_id] 
-    user = User.get(session[:user_id])
-    @sleepEntries = Sleep_Log.all
+    #user = User.get(session[:user_id])
+    #@sleepEntries = Sleep_Log.all
+    @sleepEntries = repository(:default).adapter.select('SELECT * FROM sleep_logs')
     haml :viewsleep
   end
 end
