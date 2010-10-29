@@ -3,6 +3,7 @@ require 'rubygems'
 require 'sinatra'
 require 'dm-core'
 require 'haml'
+require 'gruff'
 
 
 DataMapper.setup(:default, ENV['DB_URL'])

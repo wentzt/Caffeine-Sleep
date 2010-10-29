@@ -1,10 +1,11 @@
 %html
     %head
+        %script{:src => "http://code.jquery.com/jquery-latest.min.js"}
+        %script{:src => "js/nav.js"}
         %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
-        %script{:type => "text/javascript", :src => "style.js"}
-        %script{:type => "text/javascript", :src => "http://code.jquery.com/jquery-latest.js"}
         %title "Caffeine-Sleep"
     %body
+        %p some text
         .header-nav
             %div #{@greeting}
             %h1 Caffeine Intake Logger
