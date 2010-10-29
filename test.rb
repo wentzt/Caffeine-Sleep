@@ -24,57 +24,57 @@ get '/' do
 end
 
 get '/register' do
-   haml :register
+  haml :register
 end
 
 get '/products' do
-   @products = Product.all
-   haml :products
+  @products = Product.all
+  haml :products
 end
 
 get '/product:productId' do |id|
-   @product=Product.get(id)
-   haml :product
+  @product=Product.get(id)
+  haml :product
 end
 
 get '/addProduct' do
-   haml :addProduct
+  haml :addProduct
 end
 
 post '/addProduct' do
-   @product = Product.create(:name => params[:name], :type => params[:type], :mg => params[:mg])
-   redirect "/product#{@product.id}"
+  @product = Product.create(:name => params[:name], :type => params[:type], :mg => params[:mg])
+  redirect "/product#{@product.id}"
 end
 
 get '/deleteProduct:productId' do |id|
-   product = Product.get(id)
-   product.destroy
-   redirect '/products'
+  product = Product.get(id)
+  product.destroy
+  redirect '/products'
 end
 
 get '/groups' do
-   @groups = Group.all
-   haml :groups
+  @groups = Group.all
+  haml :groups
 end
 
 get '/group:groupId' do |id|
-   @group = Group.get(id)
-   haml :group 
+  @group = Group.get(id)
+  haml :group 
 end
 
 get '/deleteGroup:groupId' do |id|
-   group=Group.get(id)
-   group.destroy
-   redirect '/groups'
+  group=Group.get(id)
+  group.destroy
+  redirect '/groups'
 end
 
 get '/addGroup' do
-   haml :addGroup
+  haml :addGroup
 end
 
 post '/addGroup' do
-   @group = Group.create(:name => params[:name], :type => params[:type])
-   redirect "group#{@group.id}"
+  @group = Group.create(:name => params[:name], :type => params[:type])
+  redirect "group#{@group.id}"
 end
 
 
@@ -97,7 +97,7 @@ get '/viewsleep' do
   if session[:user_id] 
     user = User.get(session[:user_id])
     @sleepEntries = Sleep_Log.all
-    "#{@sleepEntries.empty?}"
+    haml :viewsleep
   end
 end
 
@@ -148,6 +148,16 @@ get '/caffeineLogs' do
   else
     halt "Access Dennied"
   end
+end
+
+get 'productivityGraph' do 
+  g = Gruff::Line.new
+  g.title = "Past 24 Hrs of Productivity"
+  g.data("productivity", [])
+  g.data("caffeine", [])
+  g.data("sleep", [])
+  g.labels = {}
+  g.write('productivityGraph.png')
 end
 
 get '/accountsettings' do
