@@ -4,10 +4,10 @@
   %body
     .header-nav
       = renderPartial "nav"
-    - if @sleepEntries.empty?
-      %h1 No Sleep Entries Found
+    #- if @sleepEntries.empty?
+    #-  %h1 No Sleep Entries Found
     #sleep
-      - @sleepEntries.each do |sleep|
+      - @sleepEntries.each do |entry|
         %p Length: 
         %span
-          = sleep.length
+          = entry.length

@@ -1,17 +1,19 @@
 %html
   %head
     %title New Product
+    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
   %body
     .header-nav
       = renderPartial "nav"
     %form{:name => "newProduct", :action => "/addProduct", :method => "post"}
-      %label{:rel => "name"} Name
-      %input{:type => "text", :name => "name"} 
-      %br
-      %label{:rel => "type"} Type
-      %input{:type => "text", :name => "type"}
-      %br
-      %label{:rel => "mg"} Amount
-      %input{:type => "text", :name => "mg"}
-      %br
-      %input{:type => "submit", :value => "Add Product"}
+      .form     
+        %label{:rel => "name"} Name
+        %input{:type => "text", :name => "name"} 
+        %br
+        %label{:rel => "type"} Type
+        %input{:type => "text", :name => "type"}
+        %br
+        %label{:rel => "mg"} Amount
+        %input{:type => "text", :name => "mg"}
+        %br
+        %input{:type => "submit", :value => "Add Product"}
