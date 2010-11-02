@@ -3,68 +3,79 @@ $lightGrey: #505050;
 $darkGrey: #242021;
 
 body {
-  background-color: $lightGrey;
-  .header-nav {
-    background-color: $blue;
-    #header {
-      background-color:$darkGrey;
-      ul.topnav {
-        list-style: none;
-	padding: 0 20px;
-	marging: 0;
-	float: left;
-	font-size: 1.2em;
-	background-color: $darkGrey;
-	li {
-	  float: left;
-	  margin: left;
-	  padding: 0 15px 0 0;
-	  position: relative;
-	  a {
-	    color: white;
-	    text-decoration: none;
-	    float: left;
-	    padding: 10px 5px;
-	    display: block;
-	  }
-	  a:hover {
-	    background-color: black;
-	  }
-	  span {
-	    float: left;
-	    background-color: $darkGrey;
-	  }
-	  span.subhover {
-	    background-position: center bottom;
-	    cursor: pointer;
-	  }
-	  ul.subnav {
-	    list-style:none;
-	    /*position: absolute;*/
-	    left: 0;
-	    top: 35px;
-	    margin:0;
-	    padding: 0;
-	    float: left;
-	    border: 1px solid #111;
-	    display: none;
-	  }
-	  li {
-	    margin: 0;
-	    padding: 0;
-	    border-top: 1px solid #252525;
-	    border-bottom: 1px solid #444;
-	    clear: both;
-	    a {
-	      float: left;
-	      padding-left: 20px;
-	    }
-	    a:hover {
-	      background-color: $darkGrey;
-	    }
-	  }
-	}
+  background: $lightGrey;
+}
+.header-nav {
+  background: $blue;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 1920;
+}
+
+#header {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 200%;
+  list-style: none;
+
+  ul {
+    width: 100%;
+    display:block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: block;
+    width: 10em;
+    text-decoration: none;
+    color: white;
+  }
+
+  a:hover {
+    color: green;
+  }
+
+  li {
+    float: left;
+    width: 10em;
+    background: $darkGrey;
+    text-align: left;
+    padding-left: 4px;
+
+    ul {
+      display: none;
+
+      li {
+        float: none;
+	width: auto;
+        font-size: 85%;
       }
     }
   }
+
+  li:hover {
+    /*border-left: .1em solid $darkGrey;*/ 
+    background-color: black;
+    padding-left: 2px;
+
+    ul {
+      position: absolute;
+      display: block;
+      width: 10.1em;
+      background: #F8DACA;
+      /*border-bottom: .1em solid #F86210;*/
+      /*border-left: .15em solid #F86210;*/
+      margin-left: -.25em;
+
+      li {
+        border: none;
+	padding: 4px;
+      }
+    }
+  }
+
 }

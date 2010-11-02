@@ -1,4 +1,10 @@
 $(document).ready(function () {
-  $("p").text("The DOM is now loaded and can be manipulated.");
-});
+		$("ul.subnav").parent().hover(
+			function () {
+			  $(this).children().slideDown('fast').show();
+			},
+			function () {
+			  $(this).chidren().slideUp('slow');
+			})
+		});
 

@@ -1,8 +1,10 @@
 %html
   %head
+    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
     %title Groups
   %body
     .header-nav
+      %h1 Caffeine
       = renderPartial "nav"
     -if @groups.empty?
       %h1 You do not have any groups
