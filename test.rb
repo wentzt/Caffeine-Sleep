@@ -3,6 +3,7 @@ require 'rubygems'
 require 'sinatra'
 require 'dm-core'
 require 'haml'
+require 'sass'
 #require 'gruff'
 
 
@@ -207,6 +208,7 @@ end
 get '/stylesheet.css' do
   content_type 'text/css', :charset => 'utf-8'
   scss :stylesheet
+  
 end
 
 helpers do
