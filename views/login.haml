@@ -1,15 +1,17 @@
 %html
   %head
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
-    %title Login
+    %title Caffeine-Sleep: Login
   %body
     .header-nav
       = renderPartial "nav"
-    %form{:name => "login", :action => "/login", :method => "post"}
-      %label{:rel => "username"} Username
-      %input{:type => "text", :name => "username"}
-      %br
-      %label{:rel => "password"} Password
-      %input{:type => "text", :name => "password"}
-      %br
-      %input{:type => "submit", :value => "Login"}
+    #content-frame
+      #content
+        %form{:name => "login", :action => "/login", :method => "post"}
+          %label{:rel => "username"} Username
+          %input{:type => "text", :name => "username"}
+          %br
+          %label{:rel => "password"} Password
+          %input{:type => "text", :name => "password"}
+          %br
+          %input{:type => "submit", :value => "Login"}

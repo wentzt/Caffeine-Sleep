@@ -1,18 +1,15 @@
 %html
-    %head
-        %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
-        %title Loging Sleep
-    %body
-        .header-nav
-            = renderPartial "nav"
+  %head
+    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
+    %title Caffeine-Sleep: Log Sleep
+  %body
+    .header-nav
+      = renderPartial "nav"
+    #content-frame
+      #content
         %form{:name => "sleep", :action => "/logsleep", :method => "post"}
-            %label{:rel => "starttime"} starttime
-            %input{:type => "text", :name => "starttime"}
-            %label{:rel => "length"} length
-            %input{:type => "text", :name => "length"}
-            %input{:type => "submit", :value => "Log Sleep"}
-        #content
-            %h1 Caffeine and intake logger
-            %p We wanted to be able to track caffeine intake vs sleep in comparison to productivity.  This is how we will do that.
-        #footer
-            Copyright - Brousalis Enterprises, LLC
+          %label{:rel => "starttime"} starttime
+          %input{:type => "text", :name => "starttime"}
+          %label{:rel => "length"} length
+          %input{:type => "text", :name => "length"}
+          %input{:type => "submit", :value => "Log Sleep"}

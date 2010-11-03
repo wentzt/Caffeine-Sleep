@@ -1,9 +1,12 @@
 %html
-    %head
-        %script{:src => "http://code.jquery.com/jquery-latest.min.js"}
-        -#%script{:src => "js/nav.js"}
-        %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
-        %title "Caffeine-Sleep"
-    %body
-        .header-nav
-            = renderPartial "nav"
+  %head
+    %script{:src => "http://code.jquery.com/jquery-latest.min.js"}
+    -#%script{:src => "js/nav.js"}
+    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
+    %title Caffeine-Sleep
+  %body
+    .header-nav
+      = renderPartial "nav"
+    #content-frame
+      #content
+        Welcome to Caffeine-Sleep!!! Please log in.

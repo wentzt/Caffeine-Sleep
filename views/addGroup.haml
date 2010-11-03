@@ -1,15 +1,17 @@
 %html
   %head
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
-    %title New Group
+    %title Caffeine-Sleep: Create Group
   %body
     .header-nav
       = renderPartial "nav"
-    %form{:action => "/addGroup", :method => "post"}
-      %label{:rel => "name"} Name 
-      %input{:type => "text", :name => "name"}
-      %br
-      %label{:rel => "type"} Type 
-      %input{:type => "text", :name => "type"} 
-      %br
-      %input{:type => "submit", :value => "Add Group"}
+    #content-frame
+      #content
+        %form{:action => "/addGroup", :method => "post"}
+          %label{:rel => "name"} Name 
+          %input{:type => "text", :name => "name"}
+          %br
+          %label{:rel => "type"} Type 
+          %input{:type => "text", :name => "type"} 
+          %br
+          %input{:type => "submit", :value => "Add Group"}

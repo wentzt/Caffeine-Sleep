@@ -1,15 +1,17 @@
 %html
-    %head
-        %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
-        %title Productivity
-    %body
-        .header-nav
-            = renderPartial "nav"
+  %head
+    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
+    %title Caffeine-Sleep: Productivity
+  %body
+    .header-nav
+      = renderPartial "nav"
+    #content-frame
+      #content
         - if @productivityEntries.empty?
-            %h1 You have not loged any productivity
-            %a{:href => "/logproductivity"} Log Productivity
+          %h1 You have not loged any productivity
+          %a{:href => "/logproductivity"} Log Productivity
         #productivity
-            - @productivityEntries.each do |entry|                  
-                %p Productivity level                         
-                %span
-                    = entry.level
+          - @productivityEntries.each do |entry|                  
+            %p Productivity level                         
+            %span
+              = entry.level
