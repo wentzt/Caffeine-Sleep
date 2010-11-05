@@ -8,6 +8,14 @@
     #content-frame
       #content
         %form{:name => "productivity", :action => "/logproductivity", :method => "post"}
-          %label{:rel => "level"} level
-          %input{:type => "text", :name => "level"}
+          %fieldset
+            %legend Productivity
+            .form
+              .form-row
+                .form-label
+                  %label{:rel => "level"} level
+                .form-input
+                  %input{:type => "text", :name => "level"}
           %input{:type => "submit", :value => "Log Productivity"}
+        %span
+          = @error

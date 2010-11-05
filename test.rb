@@ -45,8 +45,19 @@ get '/addProduct' do
 end
 
 post '/addProduct' do
-  @product = Product.create(:name => params[:name], :type => params[:type], :mg => params[:mg])
-  redirect "/product#{@product.id}"
+  @error = ""
+  if params[:name] == "" || params[:type] == "" || params[:mg] == ""
+    @error = "Some fields are missing"
+    haml :addProduct
+
+  elsif !isNumber(params[:mg])
+    @error = "the amount must be a number."
+    haml :addProduct
+ 
+  else
+    @product = Product.create(:name => params[:name], :type => params[:type], :mg => params[:mg])
+    redirect "/product#{@product.id}"
+  end  
 end
 
 get '/deleteProduct:productId' do |id|
@@ -100,12 +111,22 @@ get '/logsleep' do
 end
 
 post '/logsleep' do
+  @error = ""
   if session[:user_id]
-    user = User.get(session[:user_id])
-    @sleepEntry = Sleep_Log.create(:start_time => params[:starttime], :length => params[:length], :user => user)
+    if params[:starttime] == "" || params[:length] == ""
+      @error = "Some fields are missing"
+      haml :logsleep
+    elsif !isNumber(params[:length])
+      @error = "Length must be a number"
+      haml :logsleep
+    else
+      user = User.get(session[:user_id])
+      @sleepEntry = Sleep_Log.create(:start_time => params[:starttime], :length => params[:length], :user => user)
+      "The sleep entry id that you just created is #{@sleepEntry.id} and the length #{@sleepEntry.length} and the start time is #{@sleepEntry.start_time} and you are #{@sleepEntry.user.fname}"
+    end
+  else
+    redirect '/login'
   end
-  "The sleep entry id that you just created is #{@sleepEntry.id} and the length #{@sleepEntry.length} and the start time is #{@sleepEntry.start_time} and you are #{@sleepEntry.user.fname}"
-  #redirect 'viewsleep'
 end
     
 get '/viewsleep' do
@@ -132,12 +153,19 @@ get '/viewproductivity' do
 end
 
 post '/logproductivity' do
+  @error = ""
   if session[:user_id]
     user = User.get(session[:user_id])
-    @productivityEntry = Productivity_Log.create(:level => params[:level], :user => user)
+    if !isNumber(params[:level])
+      @error = "The level must be a number"
+      haml :logproductivity
+    else
+      @productivityEntry = Productivity_Log.create(:level => params[:level], :user => user)
+      redirect '/viewproductivity'
+    end
+  else
+    redirect '/login'
   end
-  redirect '/viewproductivity'
-
 end
 
 get '/logCaffeine' do
@@ -262,5 +290,17 @@ end
 helpers do
   def renderPartial(view)
     haml :"#{view}"
+  end
+end
+
+#Based on code for IsNumeric from 
+#http://rosettacode.org/wiki/Determine_if_a_string_is_numeric
+def isNumber(s)
+  begin
+    Float(s)
+  rescue
+    false # not numeric
+  else
+    true # numeric
   end
 end

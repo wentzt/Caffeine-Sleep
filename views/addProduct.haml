@@ -8,13 +8,24 @@
     #content-frame
       #content
         %form{:name => "newProduct", :action => "/addProduct", :method => "post"}
-          %label{:rel => "name"} Name
-          %input{:type => "text", :name => "name"} 
-          %br
-          %label{:rel => "type"} Type
-          %input{:type => "text", :name => "type"}
-          %br
-          %label{:rel => "mg"} Amount
-          %input{:type => "text", :name => "mg"}
-          %br
+          %fieldset
+            %legend Product Information
+            .form
+              .form-row
+                .form-label
+                  %label{:rel => "name"} Name
+                .form-input
+                  %input{:type => "text", :name => "name"} 
+              .form-row
+                .form-label
+                  %label{:rel => "type"} Type
+                .form-input
+                  %input{:type => "text", :name => "type"}
+              .form-row
+                .form-label
+                  %label{:rel => "mg"} Amount
+                .form-input
+                  %input{:type => "text", :name => "mg"}
           %input{:type => "submit", :value => "Add Product"}
+          %span
+            = @error
