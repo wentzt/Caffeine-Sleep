@@ -4,7 +4,7 @@ require 'sinatra'
 require 'dm-core'
 require 'haml'
 require 'sass'
-#require 'gruff'
+require 'gruff'
 
 
 DataMapper.setup(:default, ENV['DB_URL'])
@@ -12,6 +12,8 @@ DataMapper.setup(:default, ENV['DB_URL'])
 require 'models'
 
 enable :sessions
+
+SecsPerDay = 24 * 60 * 60
 
 get '/' do
   
@@ -23,6 +25,43 @@ get '/' do
     
   
   haml :index
+end
+
+get '/productivityGraph' do
+  past24Hrs = Time.now - SecsPerDay
+  user = User.get(session[:user_id])
+
+  caffeineEntries = Caffeine_Log.all(:user => user)
+  caffeineAmts = Array.new
+  caffeineEntries.each do |caffEntry|
+    logTime = caffEntry.timestamp
+    caffTime = Time.parse("#{caffEntry.time} #{logTime.day}-#{logTime.month}-#{logTime.year}")
+    if caffTime >= past24Hrs
+      caffeineAmts[caffEntry.time] = caffEntry.mg
+    end
+  end
+
+  productivityEntries = Productivity_Log.all(:timestamp.gte => past24Hrs, :user => user)
+  productivityLevels = Array.new
+  productivityEntries.each do |prodEntry|
+    productivityLevels[prodEntry.timestamp.hour]  = prodEntry.level
+  end
+
+
+  sleepEntries = repository(:default).adapter.select('SELECT * FROM sleep_logs WHERE start_time >= ? AND user_id = ?', past24Hrs, user.id)
+  sleepAmts = Array.new
+  sleepEntries.each do |sleepEntry|
+    sleepAmts[sleepEntry.start_time.hour] = sleepEntry.length
+  end
+
+  g = Gruff::Line.new 780
+  g.title = "Past 24 Hrs of Productivity"
+  g.data("productivity", productivityLevels)
+  g.data("caffeine", caffeineAmts)
+  g.data("sleep", sleepAmts)
+  g.labels = {0 => "12 am", 12 => "12 pm", 23 => "11 pm"}
+  g.write('public/graphs/productivityGraph.png')
+  haml :graph
 end
 
 get '/register' do
@@ -97,9 +136,9 @@ end
     
 get '/viewsleep' do
   if session[:user_id] 
-    #user = User.get(session[:user_id])
+    user = User.get(session[:user_id])
     #@sleepEntries = Sleep_Log.all
-    @sleepEntries = repository(:default).adapter.select('SELECT * FROM sleep_logs')
+    @sleepEntries = repository(:default).adapter.select('SELECT * FROM sleep_logs WHERE user_id = ?', user.id)
     haml :viewsleep
   end
 end
@@ -136,7 +175,6 @@ end
 
 post '/logCaffeine' do
   if session[:user_id]
-    #"The Time you entered is #{Time.parse(params[:time])}"
     user = User.get(session[:user_id])
     product = Product.get(params[:product])
     @caffeineEntry = Caffeine_Log.create(:mg => params[:mg], :time => params[:time], :user => user, :product => product)
@@ -153,15 +191,6 @@ get '/caffeineLogs' do
   end
 end
 
-get 'productivityGraph' do 
-  g = Gruff::Line.new
-  g.title = "Past 24 Hrs of Productivity"
-  g.data("productivity", [])
-  g.data("caffeine", [])
-  g.data("sleep", [])
-  g.labels = {}
-  g.write('productivityGraph.png')
-end
 
 get '/accountsettings' do
   if session[:user_id]
