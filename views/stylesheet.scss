@@ -95,3 +95,23 @@ UL.topnav LI:hover UL
 border-left: .15em solid #F86210;*/
 	min-width: 7em;
 }
+
+div.form
+{
+  margin:auto;
+  display:block;
+}
+div.form-row
+{
+  display:block;
+}
+div.form-label
+{
+  display:inline-block;
+  width:100px;
+}
+div.form-input
+{
+  display:inline;
+  width:100px;
+}

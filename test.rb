@@ -175,16 +175,34 @@ post '/accountsettings' do
   if session[:user_id] then
     user = User.get(session[:user_id])
     user.update(:fname => params[:fname], :lname => params[:lname], :username => params[:username], :password => params[:password], :email => params[:email])
+  else
+    redirect '/login'
   end
-  redirect '/'
 end
 
 post '/register' do
-  @user = User.create(:username => params[:username], :password => params[:password], :fname => params[:fname], :lname => params[:lname], :email => params[:email])
-  if @user
-    session[:user_id] = @user.id
+
+  #Check to see if the username is taken
+  if User.first(:username => params[:username]) != nil
+    @error = "The username is already taken."
+  
+  #Check for missing fields.
+  elsif
+    params[:username] == "" || params[:password] == "" || params[:fname] == "" || params[:lname]== "" || params[:email] == ""
+    @error = "One or more fields are missing."
+  
+  #Try to create the user.
+  else
+    @user = User.create(:username => params[:username], :password => params[:password], :fname => params[:fname], :lname => params[:lname], :email => params[:email])
+    if @user
+      session[:user_id] = @user.id
+      redirect '/'
+    else
+      @error = "An unknown error occured."
+    end
   end
-  redirect '/'
+
+  haml :register
 end
 
 post '/login' do
