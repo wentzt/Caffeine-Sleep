@@ -116,8 +116,8 @@ post '/logsleep' do
     if params[:starttime] == "" || params[:length] == ""
       @error = "Some fields are missing"
       haml :logsleep
-    elsif !(isNumber(params[:length]) && isNumber(params[:starttime]))  
-      @error = "start time and length must be numbers"
+    elsif !(isNumber(params[:length]))  
+      @error = "length must be a number"
       haml :logsleep
     else
       user = User.get(session[:user_id])
