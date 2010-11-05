@@ -3,20 +3,26 @@
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
     %title Caffeine-Sleep: Register
   %body
-    .header-nav
-      = renderPartial "nav"
     #content-frame
-      #content
+      #contenti
         %form{:name => "test", :action => "/register", :method => "post"}
-          %label{:rel => "username"} Username
-          %input{:type => "text", :name => "username"}
-          %label{:rel => "password"} Password
-          %input{:type => "password", :name => "password"}
-          %label{:rel => "fname"} Firstname
-          %input{:type => "fname", :name => "fname"}
-          %label{:rel => "lname"} Lastname
-          %input{:type => "lname", :name => "lname"}
-          %label{:rel => "email"} email
-          %input{:type => "email", :name => "email"}
+          %fieldset
+            %legend Registration
+            %ol
+              %li
+                %label{:rel => "username"} Username
+                %input{:type => "text", :name => "username"}
+              %li
+                %label{:rel => "password"} Password
+                %input{:type => "password", :name => "password"}
+              %li
+                %label{:rel => "fname"} Firstname
+                %input{:type => "fname", :name => "fname"}
+              %li
+                %label{:rel => "lname"} Lastname
+                %input{:type => "lname", :name => "lname"}
+              %li
+                %label{:rel => "email"} email
+                %input{:type => "email", :name => "email"}
           %input{:type => "submit", :value => "register"}
                         

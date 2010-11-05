@@ -3,8 +3,6 @@
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
     %title Caffeine-Sleep: Login
   %body
-    .header-nav
-      = renderPartial "nav"
     #content-frame
       #content
         %form{:name => "login", :action => "/login", :method => "post"}
@@ -15,3 +13,4 @@
           %input{:type => "text", :name => "password"}
           %br
           %input{:type => "submit", :value => "Login"}
+          %a{:href => "/register"} Register
