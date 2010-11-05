@@ -15,12 +15,13 @@ enable :sessions
 get '/' do
   
   @greeting = "Not logged in."
-  if session[:user_id] then
+  if session[:user_id]
     user = User.get(session[:user_id])
     @greeting = "Welcome, " + user.fname + " " + user.lname
+  else
+    redirect '/login'
   end
     
-  
   haml :index
 end
 
@@ -206,7 +207,8 @@ end
 
 get '/stylesheet.css' do
   content_type 'text/css', :charset => 'utf-8'
-  scss :stylesheet
+  #scss :stylesheet
+  return File.open("views/stylesheet.css")
 end
 
 helpers do
