@@ -1,19 +1,21 @@
 %html
   %head
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
-    %title Caffeine-Sleep Account Settings
+    %title Caffeine-Sleep: Account Settings
     %body
       .header-nav
         = renderPartial "nav"
-      %form{:name => "updateAccount", :action => "/accountsettings", :method => "post"}
-        %label{:rel => "username"} Username
-        %input{:type => "text", :name => "username", :value => "#{@user.username}"}
-        %label{:rel => "password"} Password
-        %input{:type => "password", :name => "password", :value => "#{@user.password}"}
-        %label{:rel => "fname"} Firstname
-        %input{:type => "fname", :name => "fname", :value => "#{@user.fname}"}
-        %label{:rel => "lname"} Lastname
-        %input{:type => "lname", :name => "lname", :value => "#{@user.lname}"}
-        %label{:rel => "email"} email
-        %input{:type => "text", :name => "email", :value => "#{@user.email}"}
-        %input{:type => "submit", :value => "Update"}
+      #content-frame
+        #content
+          %form{:name => "updateAccount", :action => "/accountsettings", :method => "post"}
+            %label{:rel => "username"} Username
+            %input{:type => "text", :name => "username", :value => "#{@user.username}"}
+            %label{:rel => "password"} Password
+            %input{:type => "password", :name => "password", :value => "#{@user.password}"}
+            %label{:rel => "fname"} Firstname
+            %input{:type => "fname", :name => "fname", :value => "#{@user.fname}"}
+            %label{:rel => "lname"} Lastname
+            %input{:type => "lname", :name => "lname", :value => "#{@user.lname}"}
+            %label{:rel => "email"} email
+            %input{:type => "text", :name => "email", :value => "#{@user.email}"}
+            %input{:type => "submit", :value => "Update"}

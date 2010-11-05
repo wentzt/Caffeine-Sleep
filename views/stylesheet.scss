@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $blue: #0097FF;
 $lightGrey: #505050;
 $darkGrey: #242021;
@@ -78,3 +79,102 @@ body {
   }
 
 }
+=======
+BODY
+{
+	background: #505050;
+	margin: 0px;
+}
+#content-frame
+{
+	clear: both;
+	padding: 5px;
+	background: #0097FF;
+	width: 790px;
+	margin: 5px 0px 35px;
+}
+#content
+{
+	background: #FFFFFF;
+	padding: 5px;
+}
+.header-nav
+{
+	margin: 0;
+	padding: 0;
+	width: 800px;
+	background: #242021;
+	color: #FFFFFF;
+	position: relative;
+	height: 50px;
+}
+#logged_in
+{
+	position: absolute;
+	right: 5px;
+	top: 2px;
+}
+.logo
+{
+	width: 368px;
+	background: url(logo.png) no-repeat;
+	height: 102px;
+}
+UL.topnav A
+{
+	display: block;
+	text-decoration: none;
+	color: #FFFFFF;
+	padding: 0 1em;
+	font: normal 1em/1.9em Tahoma;
+}
+UL.topnav A:hover
+{
+	color: #008000;
+	background: #CC5050;
+}
+UL.topnav LI
+{
+	float: left;
+	text-align: left;
+	background: #242021;
+}
+UL.topnav LI UL
+{
+	display: none;
+	list-style: none;
+	padding: 0;
+}
+UL.topnav LI UL LI
+{
+	float: none;
+	width: auto;
+	font-size: 85%;
+	margin: 0;
+	padding: 0;
+}
+UL.topnav LI:hover
+{
+/*border-left: .1em solid $darkGrey;*/
+	background-color: #000000;
+}
+UL.topnav
+{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 800px;
+	position: absolute;
+	background: #242021;
+	top: 20px;
+}
+UL.topnav LI:hover UL
+{
+	position: absolute;
+	display: block;
+	background: #F8DACA;
+/*border-bottom: .1em solid #F86210;
+border-left: .15em solid #F86210;*/
+	min-width: 7em;
+}
+>>>>>>> d80bac9305d308311c20fad36c0f9c1a7b2b26ee

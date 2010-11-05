@@ -1,6 +1,7 @@
 %html
   %head
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
+<<<<<<< HEAD
     %title New Product
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
   %body
@@ -18,3 +19,22 @@
         %input{:type => "text", :name => "mg"}
         %br
         %input{:type => "submit", :value => "Add Product"}
+=======
+    %title Caffeine-Sleep: Create Product
+  %body
+    .header-nav
+      = renderPartial "nav"
+    #content-frame
+      #content
+        %form{:name => "newProduct", :action => "/addProduct", :method => "post"}
+          %label{:rel => "name"} Name
+          %input{:type => "text", :name => "name"} 
+          %br
+          %label{:rel => "type"} Type
+          %input{:type => "text", :name => "type"}
+          %br
+          %label{:rel => "mg"} Amount
+          %input{:type => "text", :name => "mg"}
+          %br
+          %input{:type => "submit", :value => "Add Product"}
+>>>>>>> d80bac9305d308311c20fad36c0f9c1a7b2b26ee

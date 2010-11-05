@@ -1,13 +1,15 @@
 %html
   %head
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
-    %title #{@group.name}
+    %title Caffeine-Sleep: Group - #{@group.name}
   %body
     .header-nav
       = renderPartial "nav"
-    %h1 Group Infomation
-    %label Name: #{@group.name}
-    %br
-    %label Type: #{@group.type}
-    %br
-    %a{:href => "/deleteGroup#{@group.id}"} Delete
+    #content-frame
+      #content
+        %h1 Group Infomation
+        %label Name: #{@group.name}
+        %br
+        %label Type: #{@group.type}
+        %br
+        %a{:href => "/deleteGroup#{@group.id}"} Delete

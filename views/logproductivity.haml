@@ -1,11 +1,13 @@
 %html
-    %head
-        %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
-        %title Loging Productivity
-    %body
-        .header-nav
-            = renderPartial "nav"
+  %head
+    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
+    %title Caffeine-Sleep: Log Productivity
+  %body
+    .header-nav
+      = renderPartial "nav"
+    #content-frame
+      #content
         %form{:name => "productivity", :action => "/logproductivity", :method => "post"}
-            %label{:rel => "level"} level
-            %input{:type => "text", :name => "level"}
-            %input{:type => "submit", :value => "Log Productivity"}
+          %label{:rel => "level"} level
+          %input{:type => "text", :name => "level"}
+          %input{:type => "submit", :value => "Log Productivity"}

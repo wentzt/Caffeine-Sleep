@@ -1,10 +1,11 @@
 %html
   %head
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
-    %title Sleep
+    %title Caffeine-Sleep: Sleep
   %body
     .header-nav
       = renderPartial "nav"
+<<<<<<< HEAD
     #- if @sleepEntries.empty?
     #-  %h1 No Sleep Entries Found
     #sleep
@@ -12,3 +13,14 @@
         %p Length: 
         %span
           = entry.length
+=======
+    #content-frame
+      #content
+        - if @sleepEntries.empty?
+          %h1 No Sleep Entries Found
+        #sleep
+          - @sleepEntries.each do |sleep|
+            %p Length: 
+            %span
+              = sleep.length
+>>>>>>> d80bac9305d308311c20fad36c0f9c1a7b2b26ee

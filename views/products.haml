@@ -1,22 +1,28 @@
 %html
   %head
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
+<<<<<<< HEAD
     %title Products
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
+=======
+    %title Caffeine-Sleep: Products
+>>>>>>> d80bac9305d308311c20fad36c0f9c1a7b2b26ee
   %body
-    .header-nav
-      = renderPartial "nav"
-    - if @products.empty?
-      %h1 You do not have any products
-      %a{:href => "/addProduct"} Add a Product
-    - @products.each do |product|
-      %label Name: #{product.name}
-      %br
-      %label Type: #{product.type}
-      %br
-      %label Amount: #{product.mg}
-      %br
-      %a{:href => "/product#{product.id}"} View 
-      %a{:href => "/deleteProduct#{product.id}"} Delete 
-      %br
-      %br
+  .header-nav
+    = renderPartial "nav"
+  #content-frame
+    #content
+      - if @products.empty?
+        %h1 You do not have any products
+        %a{:href => "/addProduct"} Add a Product
+      - @products.each do |product|
+        %label Name: #{product.name}
+        %br
+        %label Type: #{product.type}
+        %br
+        %label Amount: #{product.mg}
+        %br
+        %a{:href => "/product#{product.id}"} View 
+        %a{:href => "/deleteProduct#{product.id}"} Delete 
+        %br
+        %br

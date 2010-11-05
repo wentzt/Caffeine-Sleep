@@ -1,20 +1,21 @@
 %html
   %head
     %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
-    %title Groups
+    %title Caffeine-Sleep: Groups
   %body
     .header-nav
-      %h1 Caffeine
       = renderPartial "nav"
-    -if @groups.empty?
-      %h1 You do not have any groups
-      %a{:href => "/addGroup"} Add a Group
-    -@groups.each do |group|
-      %label Name: #{group.name}
-      %br
-      %label Type: #{group.type}
-      %br
-      %a{:href => "/group#{group.id}"} View
-      %a{:href => "/deleteGroup#{group.id}"} Delete
-      %br
-      %br
+    #content-frame
+      #content
+        -if @groups.empty?
+          %h1 You do not have any groups
+          %a{:href => "/addGroup"} Add a Group
+        -@groups.each do |group|
+          %label Name: #{group.name}
+          %br
+          %label Type: #{group.type}
+          %br
+          %a{:href => "/group#{group.id}"} View
+          %a{:href => "/deleteGroup#{group.id}"} Delete
+          %br
+          %br
