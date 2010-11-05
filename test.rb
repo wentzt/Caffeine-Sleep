@@ -72,12 +72,24 @@ get '/deleteGroup:groupId' do |id|
 end
 
 get '/addGroup' do
+  @error =""
   haml :addGroup
 end
 
 post '/addGroup' do
-  @group = Group.create(:name => params[:name], :type => params[:type])
-  redirect "group#{@group.id}"
+  if !session[:user_id]
+    redirect '/login'
+  else
+    if params[:name] != "" && params[:type] != ""
+      @group = Group.create(:name => params[:name], :type => params[:type])
+      redirect '/groups'
+      #Sorry Ben.  Something I did broke your really cool get parameter passing thing.  My bad.     
+      #redirect "group#{@group.id}"
+    else 
+      @error = "One or more fields are missing."
+      haml :addGroup;
+    end
+  end
 end
 
 
@@ -172,9 +184,25 @@ get '/accountsettings' do
 end 
 
 post '/accountsettings' do
-  if session[:user_id] then
-    user = User.get(session[:user_id])
-    user.update(:fname => params[:fname], :lname => params[:lname], :username => params[:username], :password => params[:password], :email => params[:email])
+  
+  #If user is logged in
+  if session[:user_id]
+
+    #get the user
+    @user = User.get(session[:user_id])
+
+    #If fields are missing, postback an error and the original user data.
+    if params[:username] == "" || params[:password] == "" || params[:fname] == "" || params[:lname]== "" || params[:email] == ""
+      @error = "One or more fields were missing.  Please try again."
+
+    #Otherwise try to update the user
+    else
+      @user.update(:fname => params[:fname], :lname => params[:lname], :username => params[:username], :password => params[:password], :email => params[:email])
+      @error = "Account successfully updated."
+    end
+
+    haml :accountsettings
+
   else
     redirect '/login'
   end

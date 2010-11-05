@@ -4,18 +4,38 @@
     %title Caffeine-Sleep: Account Settings
     %body
       .header-nav
-        = renderPartial "nav"
+        = renderPartial "nav_after_login"
       #content-frame
         #content
           %form{:name => "updateAccount", :action => "/accountsettings", :method => "post"}
-            %label{:rel => "username"} Username
-            %input{:type => "text", :name => "username", :value => "#{@user.username}"}
-            %label{:rel => "password"} Password
-            %input{:type => "password", :name => "password", :value => "#{@user.password}"}
-            %label{:rel => "fname"} Firstname
-            %input{:type => "fname", :name => "fname", :value => "#{@user.fname}"}
-            %label{:rel => "lname"} Lastname
-            %input{:type => "lname", :name => "lname", :value => "#{@user.lname}"}
-            %label{:rel => "email"} email
-            %input{:type => "text", :name => "email", :value => "#{@user.email}"}
+            %fieldset
+              %legend Account Settings
+              .form
+                .form-row
+                  .form-label
+                    %label{:rel => "username"} Username
+                  .form-input            
+                    %input{:type => "text", :name => "username", :value => "#{@user.username}"}
+                .form-row
+                  .form-label
+                    %label{:rel => "password"} Password
+                  .form-input
+                    %input{:type => "password", :name => "password", :value => "#{@user.password}"}
+                .form-row
+                  .form-label
+                    %label{:rel => "fname"} Firstname
+                  .form-input
+                    %input{:type => "fname", :name => "fname", :value => "#{@user.fname}"}
+                .form-row
+                  .form-label
+                    %label{:rel => "lname"} Lastname
+                  .form-input
+                    %input{:type => "lname", :name => "lname", :value => "#{@user.lname}"}
+                .form-row
+                  .form-label
+                    %label{:rel => "email"} email
+                  .form-input
+                    %input{:type => "text", :name => "email", :value => "#{@user.email}"}
             %input{:type => "submit", :value => "Update"}
+          %span 
+            = @error
