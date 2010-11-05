@@ -208,13 +208,9 @@ end
 
 get '/stylesheet.css' do
   content_type 'text/css', :charset => 'utf-8'
-<<<<<<< HEAD
   #scss :stylesheet
   return File.open("views/stylesheet.css")
-=======
   scss :stylesheet
-  
->>>>>>> d80bac9305d308311c20fad36c0f9c1a7b2b26ee
 end
 
 helpers do
