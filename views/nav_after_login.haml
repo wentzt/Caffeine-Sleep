@@ -1,0 +1,30 @@
+#header
+  #logged_in #{@greeting}
+  #logo
+  %ul.topnav
+    %li 
+      %a{:href => "/"} Home
+    %li
+      %a{:href => "/logout"} Logout
+    %li
+      %a{:href => "/accountsettings"} Account
+    %li
+      %a{:href => "/groups"} Groups
+      %ul.subnav
+        %li
+          %a{:href => "/addGroup"} New Group
+    %li
+      %a{:href => "/products"} Products
+      %ul.subnav
+        %li
+          %a{:href => "/addProduct"} New Product
+    %li
+      %a{:href => "/viewproductivity"} Productivity
+      %ul.subnav
+        %li
+          %a{:href => "/logproductivity"} Log New Productivity
+    %li
+      %a{:href => "/viewsleep"} Sleep
+      %ul.subnav
+        %li
+          %a{:href => "/logsleep"} Log New Sleep
