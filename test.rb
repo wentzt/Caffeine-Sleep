@@ -85,7 +85,7 @@ end
 
 post '/addProduct' do
   @error = ""
-  if params[:name] == "" || params[:type] == "" || params[:mg] == ""
+  if params[:name] == "" || params[:mg] == "" || params[:type] == ""
     @error = "Some fields are missing"
     haml :addProduct
 
@@ -131,13 +131,12 @@ post '/addGroup' do
     redirect '/login'
   else
     if params[:name] != "" && params[:type] != ""
-      @group = Group.create(:name => params[:name], :type => params[:type])
-      redirect '/groups'
+      @group = Group
       #Sorry Ben.  Something I did broke your really cool get parameter passing thing.  My bad.     
       #redirect "group#{@group.id}"
     else 
       @error = "One or more fields are missing."
-      haml :addGroup;
+      haml :addGroup
     end
   end
 end
@@ -156,12 +155,12 @@ post '/logsleep' do
       @error = "Some fields are missing"
       haml :logsleep
     elsif !(isNumber(params[:length]))  
-      @error = "length must be a number"
+      @error = "length" 
       haml :logsleep
     else
       user = User.get(session[:user_id])
       @sleepEntry = Sleep_Log.create(:start_time => params[:starttime], :length => params[:length], :user => user)
-      "The sleep entry id that you just created is #{@sleepEntry.id} and the length #{@sleepEntry.length} and the start time is #{@sleepEntry.start_time} and you are #{@sleepEntry.user.fname}"
+      redirect '/viewsleep'
     end
   else
     redirect '/login'
@@ -171,7 +170,6 @@ end
 get '/viewsleep' do
   if session[:user_id] 
     user = User.get(session[:user_id])
-    #@sleepEntries = Sleep_Log.all
     @sleepEntries = repository(:default).adapter.select('SELECT * FROM sleep_logs WHERE user_id = ?', user.id)
     haml :viewsleep
   end
@@ -206,7 +204,6 @@ post '/logproductivity' do
     redirect '/login'
   end
 end
-
 get '/logCaffeine' do
   if session[:user_id]
     @products = Product.all
@@ -220,7 +217,7 @@ post '/logCaffeine' do
     product = Product.get(params[:product])
     @caffeineEntry = Caffeine_Log.create(:mg => params[:mg], :time => params[:time], :user => user, :product => product)
   end
-  "The caffeine id you just created is #{@caffeineEntry.id} and time was #{@caffeineEntry.time} at #{@caffeineEntry.timestamp}"
+  redirect '/caffeineLogs'
 end
 
 get '/caffeineLogs' do
