@@ -18,12 +18,13 @@ SecsPerDay = 24 * 60 * 60
 get '/' do
   
   @greeting = "Not logged in."
-  if session[:user_id] then
+  if session[:user_id]
     user = User.get(session[:user_id])
     @greeting = "Welcome, " + user.fname + " " + user.lname
+  else
+    redirect '/login'
   end
     
-  
   haml :index
 end
 
@@ -83,8 +84,19 @@ get '/addProduct' do
 end
 
 post '/addProduct' do
-  @product = Product.create(:name => params[:name], :type => params[:type], :mg => params[:mg])
-  redirect "/product#{@product.id}"
+  @error = ""
+  if params[:name] == "" || params[:type] == "" || params[:mg] == ""
+    @error = "Some fields are missing"
+    haml :addProduct
+
+  elsif !isNumber(params[:mg])
+    @error = "the amount must be a number."
+    haml :addProduct
+ 
+  else
+    @product = Product.create(:name => params[:name], :type => params[:type], :mg => params[:mg])
+    redirect "/product#{@product.id}"
+  end  
 end
 
 get '/deleteProduct:productId' do |id|
@@ -110,12 +122,24 @@ get '/deleteGroup:groupId' do |id|
 end
 
 get '/addGroup' do
+  @error =""
   haml :addGroup
 end
 
 post '/addGroup' do
-  @group = Group.create(:name => params[:name], :type => params[:type])
-  redirect "group#{@group.id}"
+  if !session[:user_id]
+    redirect '/login'
+  else
+    if params[:name] != "" && params[:type] != ""
+      @group = Group.create(:name => params[:name], :type => params[:type])
+      redirect '/groups'
+      #Sorry Ben.  Something I did broke your really cool get parameter passing thing.  My bad.     
+      #redirect "group#{@group.id}"
+    else 
+      @error = "One or more fields are missing."
+      haml :addGroup;
+    end
+  end
 end
 
 
@@ -126,12 +150,22 @@ get '/logsleep' do
 end
 
 post '/logsleep' do
+  @error = ""
   if session[:user_id]
-    user = User.get(session[:user_id])
-    @sleepEntry = Sleep_Log.create(:start_time => params[:starttime], :length => params[:length], :user => user)
+    if params[:starttime] == "" || params[:length] == ""
+      @error = "Some fields are missing"
+      haml :logsleep
+    elsif !(isNumber(params[:length]))  
+      @error = "length must be a number"
+      haml :logsleep
+    else
+      user = User.get(session[:user_id])
+      @sleepEntry = Sleep_Log.create(:start_time => params[:starttime], :length => params[:length], :user => user)
+      "The sleep entry id that you just created is #{@sleepEntry.id} and the length #{@sleepEntry.length} and the start time is #{@sleepEntry.start_time} and you are #{@sleepEntry.user.fname}"
+    end
+  else
+    redirect '/login'
   end
-  "The sleep entry id that you just created is #{@sleepEntry.id} and the length #{@sleepEntry.length} and the start time is #{@sleepEntry.start_time} and you are #{@sleepEntry.user.fname}"
-  #redirect 'viewsleep'
 end
     
 get '/viewsleep' do
@@ -158,12 +192,19 @@ get '/viewproductivity' do
 end
 
 post '/logproductivity' do
+  @error = ""
   if session[:user_id]
     user = User.get(session[:user_id])
-    @productivityEntry = Productivity_Log.create(:level => params[:level], :user => user)
+    if !isNumber(params[:level])
+      @error = "The level must be a number"
+      haml :logproductivity
+    else
+      @productivityEntry = Productivity_Log.create(:level => params[:level], :user => user)
+      redirect '/viewproductivity'
+    end
+  else
+    redirect '/login'
   end
-  redirect '/viewproductivity'
-
 end
 
 get '/logCaffeine' do
@@ -200,19 +241,53 @@ get '/accountsettings' do
 end 
 
 post '/accountsettings' do
-  if session[:user_id] then
-    user = User.get(session[:user_id])
-    user.update(:fname => params[:fname], :lname => params[:lname], :username => params[:username], :password => params[:password], :email => params[:email])
+  
+  #If user is logged in
+  if session[:user_id]
+
+    #get the user
+    @user = User.get(session[:user_id])
+
+    #If fields are missing, postback an error and the original user data.
+    if params[:username] == "" || params[:password] == "" || params[:fname] == "" || params[:lname]== "" || params[:email] == ""
+      @error = "One or more fields were missing.  Please try again."
+
+    #Otherwise try to update the user
+    else
+      @user.update(:fname => params[:fname], :lname => params[:lname], :username => params[:username], :password => params[:password], :email => params[:email])
+      @error = "Account successfully updated."
+    end
+
+    haml :accountsettings
+
+  else
+    redirect '/login'
   end
-  redirect '/'
 end
 
 post '/register' do
-  @user = User.create(:username => params[:username], :password => params[:password], :fname => params[:fname], :lname => params[:lname], :email => params[:email])
-  if @user
-    session[:user_id] = @user.id
+
+  #Check to see if the username is taken
+  if User.first(:username => params[:username]) != nil
+    @error = "The username is already taken."
+  
+  #Check for missing fields.
+  elsif
+    params[:username] == "" || params[:password] == "" || params[:fname] == "" || params[:lname]== "" || params[:email] == ""
+    @error = "One or more fields are missing."
+  
+  #Try to create the user.
+  else
+    @user = User.create(:username => params[:username], :password => params[:password], :fname => params[:fname], :lname => params[:lname], :email => params[:email])
+    if @user
+      session[:user_id] = @user.id
+      redirect '/'
+    else
+      @error = "An unknown error occured."
+    end
   end
-  redirect '/'
+
+  haml :register
 end
 
 post '/login' do
@@ -237,11 +312,24 @@ end
 get '/stylesheet.css' do
   content_type 'text/css', :charset => 'utf-8'
   scss :stylesheet
-  
+  #return File.open("views/stylesheet.css")
+  #scss :stylesheet
 end
 
 helpers do
   def renderPartial(view)
     haml :"#{view}"
+  end
+end
+
+#Based on code for IsNumeric from 
+#http://rosettacode.org/wiki/Determine_if_a_string_is_numeric
+def isNumber(s)
+  begin
+    Float(s)
+  rescue
+    false # not numeric
+  else
+    true # numeric
   end
 end

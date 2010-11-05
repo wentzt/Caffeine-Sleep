@@ -4,12 +4,23 @@
     %title Caffeine-Sleep: Log Sleep
   %body
     .header-nav
-      = renderPartial "nav"
+      = renderPartial "nav_after_login"
     #content-frame
       #content
         %form{:name => "sleep", :action => "/logsleep", :method => "post"}
-          %label{:rel => "starttime"} starttime
-          %input{:type => "text", :name => "starttime"}
-          %label{:rel => "length"} length
-          %input{:type => "text", :name => "length"}
+          %fieldset
+            %legend Sleep Information
+            .form
+              .form-row
+                .form-label
+                  %label{:rel => "starttime"} starttime
+                .form-input 
+                  %input{:type => "text", :name => "starttime"}
+              .form-row
+                .form-label
+                  %label{:rel => "length"} length
+                .form-input
+                  %input{:type => "text", :name => "length"}
           %input{:type => "submit", :value => "Log Sleep"}
+          %span
+            = @error

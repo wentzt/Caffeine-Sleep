@@ -4,14 +4,23 @@
     %title Caffeine-Sleep: Create Group
   %body
     .header-nav
-      = renderPartial "nav"
+      = renderPartial "nav_after_login"
     #content-frame
       #content
         %form{:action => "/addGroup", :method => "post"}
-          %label{:rel => "name"} Name 
-          %input{:type => "text", :name => "name"}
-          %br
-          %label{:rel => "type"} Type 
-          %input{:type => "text", :name => "type"} 
-          %br
+          %fieldset
+            %legend Group Information
+            .form
+              .form-row
+                .form-label
+                  %label{:rel => "name"} Name
+                .form-input 
+                  %input{:type => "text", :name => "name"}
+              .form-row
+                .form-label
+                  %label{:rel => "type"} Type 
+                .form-input
+                  %input{:type => "text", :name => "type"} 
           %input{:type => "submit", :value => "Add Group"}
+        %span 
+          = @error
