@@ -1,0 +1,10 @@
+%html
+  %head
+    %link{:rel => "stylesheet", :type => "text/css", :href => "stylesheet.css"}
+    %title Productivity Graph
+  %body
+    .header-nav
+      = renderPartial "nav"
+    #content-frame
+      #content
+        %img{:src => "graphs/productivityGraph.png", :alt => "24Hr Productivity Graph"}
