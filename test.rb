@@ -49,10 +49,14 @@ get '/productivityGraph' do
   end
 
 
-  sleepEntries = repository(:default).adapter.select('SELECT * FROM sleep_logs WHERE start_time >= ? AND user_id = ?', past24Hrs, user.id)
+  sleepEntries = repository(:default).adapter.select('SELECT * FROM sleep_logs WHERE user_id = ?', user.id)
   sleepAmts = Array.new
   sleepEntries.each do |sleepEntry|
-    sleepAmts[sleepEntry.start_time.hour] = sleepEntry.length
+    logTime = sleepEntry.timestamp
+    sleepTime = Time.parse("#{sleepEntry.start_time} #{logTime.day}-#{logTime.month}-#{logTime.year}")
+    if sleepTime >= past24Hrs
+      sleepAmts[sleepTime.hour] = sleepEntry.length
+    end
   end
 
   g = Gruff::Line.new 780
@@ -60,7 +64,6 @@ get '/productivityGraph' do
   g.data("productivity", productivityLevels)
   g.data("caffeine", caffeineAmts)
   g.data("sleep", sleepAmts)
-  g.labels = {0 => "12 am", 12 => "12 pm", 23 => "11 pm"}
   g.write('public/graphs/productivityGraph.png')
   haml :graph
 end
@@ -131,9 +134,9 @@ post '/addGroup' do
     redirect '/login'
   else
     if params[:name] != "" && params[:type] != ""
-      @group = Group
+      @group = Group.create(:name => params[:name], :type => params[:type])
       #Sorry Ben.  Something I did broke your really cool get parameter passing thing.  My bad.     
-      #redirect "group#{@group.id}"
+      redirect "/group#{@group.id}"
     else 
       @error = "One or more fields are missing."
       haml :addGroup
@@ -222,7 +225,8 @@ end
 
 get '/caffeineLogs' do
   if session[:user_id]
-    @caffeineEntries = Caffeine_Log.all
+    user = User.get(session[:user_id])
+    @caffeineEntries = Caffeine_Log.all(:user => user)
     haml :caffeineLogs
   else
     halt "Access Dennied"
